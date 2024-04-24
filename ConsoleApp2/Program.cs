@@ -6,12 +6,12 @@ class Program
     {
         Fireball fireball = new Fireball();
         ShitEverywhere shitEverywhere = new ShitEverywhere();
-        
-        Console.WriteLine("FIREBALL");
+
+        Console.WriteLine("Fireball");
         fireball.Validate();
         fireball.Execute();
         Console.WriteLine();
-        Console.WriteLine("SHITEVERYWHERE");
+        Console.WriteLine("ShitEverywhere");
         shitEverywhere.Validate();
         shitEverywhere.Execute();
 

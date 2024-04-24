@@ -1,21 +1,22 @@
 ﻿namespace ConsoleApp2;
 
-class Fireball : AbilityBase<SingleTarget, Damaging>
+class Fireball : AbilityBase
 {
     public Fireball()
+        : base(typeof(TargetTypeSingleTarget), typeof(DamageTypeDamaging))
     {
-    }
 
-    public override bool Validate()
-    {
-        base.Validate();
-        Console.WriteLine("Fireball custom validation");
-        return true;
     }
 
     public override void Execute()
     {
         base.Execute();
-        Console.WriteLine("Fireball custom execution");
+        Console.WriteLine("Fireball.Execute()");
+    }
+
+    public override void Validate()
+    {
+        base.Validate();
+        Console.WriteLine("Fireball.Validate()");
     }
 }

@@ -1,22 +1,29 @@
 ﻿namespace ConsoleApp2;
 
-abstract class AbilityBase<TargetType, DamageType>
-    where TargetType : ITargetType, new()
-    where DamageType : IDamageType, new()
+abstract class AbilityBase
 {
-    private TargetType _targetHandler = new TargetType();
-    private DamageType _damageHandler = new DamageType();
+    protected IEnumerable<IAbilityHandler> _abilityHandlers { get; }
 
-    public virtual bool Validate()
+    protected AbilityBase(params Type[] abilityHandlerTypes)
     {
-        _targetHandler.Validate();
-        _damageHandler.Validate();
-        return true;
+        _abilityHandlers = abilityHandlerTypes.Select(handler => (IAbilityHandler)handler.GetProperty("Instance").GetValue(null));
     }
 
     public virtual void Execute()
     {
-        _targetHandler.Execute();
-        _damageHandler.Execute();
+        Console.WriteLine("AbilityBase.Execute()");
+        foreach (var abilityHandler in _abilityHandlers)
+        {
+            abilityHandler.Execute();
+        }
+    }
+
+    public virtual void Validate()
+    {
+        Console.WriteLine("AbilityBase.Validate()");
+        foreach (var abilityHandler in _abilityHandlers)
+        {
+            abilityHandler.Validate();
+        }
     }
 }
